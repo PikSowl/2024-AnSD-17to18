@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <random>
 #include <algorithm>
 
@@ -63,15 +63,20 @@ void lab_17(){
 }
 
 void lab_18(){
-    int n = 5;
+    int n = 10;
     int arr[n];
     int sum;
 
-    cout << "Input array:";
-    for(int i = 0; i < n; i++){
-        cin >> arr[i];
-    }
-    cout << "Input goal number:";
+    std::random_device r;
+    std::default_random_engine randomEngine(r());
+    std::uniform_int_distribution<int> d20(1, 20);
+
+    for (int & i : arr){
+        i = d20(randomEngine);
+        cout << i << ' ';
+    }        
+
+    cout << endl << "Input goal number:";
     cin >> sum;
 
     bool dp[n + 1][sum + 1];
@@ -89,8 +94,8 @@ void lab_18(){
                 dp[i][j] = dp[i - 1][j] || dp[i - 1][j - arr[i - 1]];
         }
     }
-    if(dp[n][sum]) cout << "there is a solution";
-    else cout << "there isn't a solution";
+    if(dp[n][sum]) cout << "There is a solution";
+    else cout << "There isn't a solution";
 }
 
 int main() {
@@ -112,4 +117,3 @@ int main() {
         }
     }
 }
-
